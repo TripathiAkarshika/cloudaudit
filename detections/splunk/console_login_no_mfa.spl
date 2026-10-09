@@ -1,0 +1,14 @@
+`comment("DETECTION: Console sign-in without MFA
+Severity: HIGH
+Why: A successful console login that did not present MFA means either a user
+is missing MFA (CloudAudit check IAM_003) or an attacker logged in with just
+a password.
+MITRE ATT&CK: T1078.004 (Valid Accounts: Cloud Accounts)
+Runbook: detections/runbooks/console_login_no_mfa.md")`
+
+index=aws sourcetype="aws:cloudtrail" eventName=ConsoleLogin
+    "responseElements.ConsoleLogin"=Success
+| where 'additionalEventData.MFAUsed'!="Yes"
+| table _time userIdentity.arn sourceIPAddress userAgent
+        additionalEventData.MFAUsed
+| sort - _time

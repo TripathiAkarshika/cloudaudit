@@ -1,0 +1,13 @@
+`comment("DETECTION: Root account activity
+Severity: CRITICAL
+Why: The root user should never be used day to day. Any root API call or
+console login outside a planned break-glass window deserves immediate review.
+MITRE ATT&CK: T1078.004 (Valid Accounts: Cloud Accounts)
+Runbook: detections/runbooks/root_account_usage.md")`
+
+index=aws sourcetype="aws:cloudtrail" userIdentity.type=Root
+| where isnull('userIdentity.invokedBy')
+| stats earliest(_time) as first_seen latest(_time) as last_seen count
+        values(eventName) as events values(sourceIPAddress) as source_ips
+        by userIdentity.accountId
+| convert ctime(first_seen) ctime(last_seen)

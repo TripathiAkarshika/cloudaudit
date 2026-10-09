@@ -1,0 +1,17 @@
+`comment("DETECTION: Security group modified
+Severity: MEDIUM
+Why: Opening a security group is how an exposure starts (CloudAudit checks
+EC2_001..EC2_004 find them at rest; this catches the moment of change).
+Pay special attention to AuthorizeSecurityGroupIngress with 0.0.0.0/0.
+MITRE ATT&CK: T1562.007 (Impair Defenses: Disable or Modify Cloud Firewall)
+Runbook: detections/runbooks/security_group_changes.md")`
+
+index=aws sourcetype="aws:cloudtrail"
+    eventName IN (AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress,
+                  RevokeSecurityGroupIngress, RevokeSecurityGroupEgress,
+                  CreateSecurityGroup, DeleteSecurityGroup)
+| eval world_open=if(like(_raw, "%0.0.0.0/0%") OR like(_raw, "%::/0%"),
+                     "YES", "no")
+| table _time eventName userIdentity.arn awsRegion
+        requestParameters.groupId world_open sourceIPAddress
+| sort - _time

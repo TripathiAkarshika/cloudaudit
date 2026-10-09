@@ -1,0 +1,12 @@
+`comment("DETECTION: CloudTrail tampering
+Severity: CRITICAL
+Why: Attackers stop or delete trails to blind the account before acting
+(CloudAudit check CT_003 finds the stopped state; this catches the act).
+MITRE ATT&CK: T1562.008 (Impair Defenses: Disable or Modify Cloud Logs)
+Runbook: detections/runbooks/cloudtrail_tampering.md")`
+
+index=aws sourcetype="aws:cloudtrail"
+    eventName IN (StopLogging, DeleteTrail, UpdateTrail, PutEventSelectors)
+| table _time eventName userIdentity.arn requestParameters.name
+        sourceIPAddress userAgent
+| sort - _time

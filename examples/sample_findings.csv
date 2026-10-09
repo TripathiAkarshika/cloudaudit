@@ -1,0 +1,28 @@
+check_id,title,severity,service,resource,region,description,cis,runbook
+IAM_001,Root account MFA not enabled,CRITICAL,iam,root,global,The root account does not have MFA enabled.,1.5,runbooks/IAM_001.md
+CT_001,No multi-region CloudTrail,HIGH,cloudtrail,account,global,"No trail records management events across all regions, so API activity outside the home region is invisible.",3.1,runbooks/CT_001.md
+EC2_001,Security group open to the world on SSH (22),HIGH,ec2,sg-78cc6f96846330f0f (web-debug),us-east-1,Ingress from 0.0.0.0/0 reaches port 22.,5.2,runbooks/EC2_001.md
+EC2_002,Security group open to the world on RDP (3389),HIGH,ec2,sg-78cc6f96846330f0f (web-debug),us-east-1,Ingress from 0.0.0.0/0 reaches port 3389.,5.2,runbooks/EC2_002.md
+IAM_003,Console user without MFA,HIGH,iam,akarshika.admin,global,User has a console password but no MFA device.,1.10,runbooks/IAM_003.md
+IAM_006,Customer-managed policy allows full admin,HIGH,iam,quick-fix-admin,global,"Policy allows Action ""*"" on Resource ""*"", violating least privilege.",1.16,runbooks/IAM_006.md
+S3_001,S3 bucket ACL grants public access,HIGH,s3,customer-exports,global,Bucket ACL grants access to 1 public group(s) (AllUsers/AuthenticatedUsers).,2.1.5,runbooks/S3_001.md
+S3_002,S3 bucket policy allows public access,HIGH,s3,app-assets,global,"Bucket policy contains an unconditional Allow statement with Principal ""*"".",2.1.5,runbooks/S3_002.md
+S3_003,S3 Block Public Access not fully enabled,HIGH,s3,app-assets,global,"Block Public Access settings disabled: BlockPublicAcls, IgnorePublicAcls, BlockPublicPolicy, RestrictPublicBuckets.",2.1.5,runbooks/S3_003.md
+S3_003,S3 Block Public Access not fully enabled,HIGH,s3,customer-exports,global,"Block Public Access settings disabled: BlockPublicAcls, IgnorePublicAcls, BlockPublicPolicy, RestrictPublicBuckets.",2.1.5,runbooks/S3_003.md
+S3_003,S3 Block Public Access not fully enabled,HIGH,s3,terraform-state,global,"Block Public Access settings disabled: BlockPublicAcls, IgnorePublicAcls, BlockPublicPolicy, RestrictPublicBuckets.",2.1.5,runbooks/S3_003.md
+EC2_004,Default security group allows traffic,MEDIUM,ec2,sg-d826c35b19453fbcf,us-east-1,The default security group should have no inbound or outbound rules so accidental use grants nothing.,5.3,runbooks/EC2_004.md
+EC2_005,EBS volume not encrypted,MEDIUM,ec2,vol-bafec3662b67f2d88,us-east-1,Volume is not encrypted at rest.,2.2.1,runbooks/EC2_005.md
+EC2_005,EBS volume not encrypted,MEDIUM,ec2,vol-d0f6cd65c340476ac,us-east-1,Volume is not encrypted at rest.,2.2.1,runbooks/EC2_005.md
+EC2_006,EBS encryption by default disabled,MEDIUM,ec2,account-setting/us-east-1,us-east-1,New EBS volumes in this region are not encrypted automatically.,2.2.1,runbooks/EC2_006.md
+EC2_007,Instance does not enforce IMDSv2,MEDIUM,ec2,i-559b7dc437e7763e4,us-east-1,"Instance metadata service accepts IMDSv1 requests (HttpTokens is not 'required'), enabling SSRF credential theft.",5.6,runbooks/EC2_007.md
+IAM_008,Weak or missing account password policy,MEDIUM,iam,account-password-policy,global,No account password policy is set.,1.8,runbooks/IAM_008.md
+S3_004,S3 bucket default encryption disabled,MEDIUM,s3,app-assets,global,Bucket has no default server-side encryption configuration.,best practice,runbooks/S3_004.md
+S3_004,S3 bucket default encryption disabled,MEDIUM,s3,customer-exports,global,Bucket has no default server-side encryption configuration.,best practice,runbooks/S3_004.md
+S3_004,S3 bucket default encryption disabled,MEDIUM,s3,terraform-state,global,Bucket has no default server-side encryption configuration.,best practice,runbooks/S3_004.md
+IAM_007,Policy attached directly to user,LOW,iam,deploy-bot,global,1 attached and 0 inline policies on the user; permissions should flow through groups or roles.,1.15,runbooks/IAM_007.md
+S3_005,S3 bucket versioning disabled,LOW,s3,app-assets,global,"Versioning is not enabled, so deleted or overwritten objects cannot be recovered.",best practice,runbooks/S3_005.md
+S3_005,S3 bucket versioning disabled,LOW,s3,customer-exports,global,"Versioning is not enabled, so deleted or overwritten objects cannot be recovered.",best practice,runbooks/S3_005.md
+S3_005,S3 bucket versioning disabled,LOW,s3,terraform-state,global,"Versioning is not enabled, so deleted or overwritten objects cannot be recovered.",best practice,runbooks/S3_005.md
+S3_006,S3 server access logging disabled,LOW,s3,app-assets,global,Server access logging is off; bucket-level request history is not being recorded.,best practice,runbooks/S3_006.md
+S3_006,S3 server access logging disabled,LOW,s3,customer-exports,global,Server access logging is off; bucket-level request history is not being recorded.,best practice,runbooks/S3_006.md
+S3_006,S3 server access logging disabled,LOW,s3,terraform-state,global,Server access logging is off; bucket-level request history is not being recorded.,best practice,runbooks/S3_006.md

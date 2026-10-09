@@ -1,0 +1,314 @@
+{
+  "account_id": "123456789012",
+  "generated_at": "2026-10-09T23:30:14+00:00",
+  "regions": [
+    "us-east-1"
+  ],
+  "checks_run": 24,
+  "severity_counts": {
+    "CRITICAL": 1,
+    "HIGH": 10,
+    "MEDIUM": 9,
+    "LOW": 7
+  },
+  "findings": [
+    {
+      "check_id": "IAM_001",
+      "title": "Root account MFA not enabled",
+      "severity": "CRITICAL",
+      "service": "iam",
+      "resource": "root",
+      "region": "global",
+      "description": "The root account does not have MFA enabled.",
+      "cis": "1.5",
+      "runbook": "runbooks/IAM_001.md"
+    },
+    {
+      "check_id": "CT_001",
+      "title": "No multi-region CloudTrail",
+      "severity": "HIGH",
+      "service": "cloudtrail",
+      "resource": "account",
+      "region": "global",
+      "description": "No trail records management events across all regions, so API activity outside the home region is invisible.",
+      "cis": "3.1",
+      "runbook": "runbooks/CT_001.md"
+    },
+    {
+      "check_id": "EC2_001",
+      "title": "Security group open to the world on SSH (22)",
+      "severity": "HIGH",
+      "service": "ec2",
+      "resource": "sg-78cc6f96846330f0f (web-debug)",
+      "region": "us-east-1",
+      "description": "Ingress from 0.0.0.0/0 reaches port 22.",
+      "cis": "5.2",
+      "runbook": "runbooks/EC2_001.md"
+    },
+    {
+      "check_id": "EC2_002",
+      "title": "Security group open to the world on RDP (3389)",
+      "severity": "HIGH",
+      "service": "ec2",
+      "resource": "sg-78cc6f96846330f0f (web-debug)",
+      "region": "us-east-1",
+      "description": "Ingress from 0.0.0.0/0 reaches port 3389.",
+      "cis": "5.2",
+      "runbook": "runbooks/EC2_002.md"
+    },
+    {
+      "check_id": "IAM_003",
+      "title": "Console user without MFA",
+      "severity": "HIGH",
+      "service": "iam",
+      "resource": "akarshika.admin",
+      "region": "global",
+      "description": "User has a console password but no MFA device.",
+      "cis": "1.10",
+      "runbook": "runbooks/IAM_003.md"
+    },
+    {
+      "check_id": "IAM_006",
+      "title": "Customer-managed policy allows full admin",
+      "severity": "HIGH",
+      "service": "iam",
+      "resource": "quick-fix-admin",
+      "region": "global",
+      "description": "Policy allows Action \"*\" on Resource \"*\", violating least privilege.",
+      "cis": "1.16",
+      "runbook": "runbooks/IAM_006.md"
+    },
+    {
+      "check_id": "S3_001",
+      "title": "S3 bucket ACL grants public access",
+      "severity": "HIGH",
+      "service": "s3",
+      "resource": "customer-exports",
+      "region": "global",
+      "description": "Bucket ACL grants access to 1 public group(s) (AllUsers/AuthenticatedUsers).",
+      "cis": "2.1.5",
+      "runbook": "runbooks/S3_001.md"
+    },
+    {
+      "check_id": "S3_002",
+      "title": "S3 bucket policy allows public access",
+      "severity": "HIGH",
+      "service": "s3",
+      "resource": "app-assets",
+      "region": "global",
+      "description": "Bucket policy contains an unconditional Allow statement with Principal \"*\".",
+      "cis": "2.1.5",
+      "runbook": "runbooks/S3_002.md"
+    },
+    {
+      "check_id": "S3_003",
+      "title": "S3 Block Public Access not fully enabled",
+      "severity": "HIGH",
+      "service": "s3",
+      "resource": "app-assets",
+      "region": "global",
+      "description": "Block Public Access settings disabled: BlockPublicAcls, IgnorePublicAcls, BlockPublicPolicy, RestrictPublicBuckets.",
+      "cis": "2.1.5",
+      "runbook": "runbooks/S3_003.md"
+    },
+    {
+      "check_id": "S3_003",
+      "title": "S3 Block Public Access not fully enabled",
+      "severity": "HIGH",
+      "service": "s3",
+      "resource": "customer-exports",
+      "region": "global",
+      "description": "Block Public Access settings disabled: BlockPublicAcls, IgnorePublicAcls, BlockPublicPolicy, RestrictPublicBuckets.",
+      "cis": "2.1.5",
+      "runbook": "runbooks/S3_003.md"
+    },
+    {
+      "check_id": "S3_003",
+      "title": "S3 Block Public Access not fully enabled",
+      "severity": "HIGH",
+      "service": "s3",
+      "resource": "terraform-state",
+      "region": "global",
+      "description": "Block Public Access settings disabled: BlockPublicAcls, IgnorePublicAcls, BlockPublicPolicy, RestrictPublicBuckets.",
+      "cis": "2.1.5",
+      "runbook": "runbooks/S3_003.md"
+    },
+    {
+      "check_id": "EC2_004",
+      "title": "Default security group allows traffic",
+      "severity": "MEDIUM",
+      "service": "ec2",
+      "resource": "sg-d826c35b19453fbcf",
+      "region": "us-east-1",
+      "description": "The default security group should have no inbound or outbound rules so accidental use grants nothing.",
+      "cis": "5.3",
+      "runbook": "runbooks/EC2_004.md"
+    },
+    {
+      "check_id": "EC2_005",
+      "title": "EBS volume not encrypted",
+      "severity": "MEDIUM",
+      "service": "ec2",
+      "resource": "vol-bafec3662b67f2d88",
+      "region": "us-east-1",
+      "description": "Volume is not encrypted at rest.",
+      "cis": "2.2.1",
+      "runbook": "runbooks/EC2_005.md"
+    },
+    {
+      "check_id": "EC2_005",
+      "title": "EBS volume not encrypted",
+      "severity": "MEDIUM",
+      "service": "ec2",
+      "resource": "vol-d0f6cd65c340476ac",
+      "region": "us-east-1",
+      "description": "Volume is not encrypted at rest.",
+      "cis": "2.2.1",
+      "runbook": "runbooks/EC2_005.md"
+    },
+    {
+      "check_id": "EC2_006",
+      "title": "EBS encryption by default disabled",
+      "severity": "MEDIUM",
+      "service": "ec2",
+      "resource": "account-setting/us-east-1",
+      "region": "us-east-1",
+      "description": "New EBS volumes in this region are not encrypted automatically.",
+      "cis": "2.2.1",
+      "runbook": "runbooks/EC2_006.md"
+    },
+    {
+      "check_id": "EC2_007",
+      "title": "Instance does not enforce IMDSv2",
+      "severity": "MEDIUM",
+      "service": "ec2",
+      "resource": "i-559b7dc437e7763e4",
+      "region": "us-east-1",
+      "description": "Instance metadata service accepts IMDSv1 requests (HttpTokens is not 'required'), enabling SSRF credential theft.",
+      "cis": "5.6",
+      "runbook": "runbooks/EC2_007.md"
+    },
+    {
+      "check_id": "IAM_008",
+      "title": "Weak or missing account password policy",
+      "severity": "MEDIUM",
+      "service": "iam",
+      "resource": "account-password-policy",
+      "region": "global",
+      "description": "No account password policy is set.",
+      "cis": "1.8",
+      "runbook": "runbooks/IAM_008.md"
+    },
+    {
+      "check_id": "S3_004",
+      "title": "S3 bucket default encryption disabled",
+      "severity": "MEDIUM",
+      "service": "s3",
+      "resource": "app-assets",
+      "region": "global",
+      "description": "Bucket has no default server-side encryption configuration.",
+      "cis": "best practice",
+      "runbook": "runbooks/S3_004.md"
+    },
+    {
+      "check_id": "S3_004",
+      "title": "S3 bucket default encryption disabled",
+      "severity": "MEDIUM",
+      "service": "s3",
+      "resource": "customer-exports",
+      "region": "global",
+      "description": "Bucket has no default server-side encryption configuration.",
+      "cis": "best practice",
+      "runbook": "runbooks/S3_004.md"
+    },
+    {
+      "check_id": "S3_004",
+      "title": "S3 bucket default encryption disabled",
+      "severity": "MEDIUM",
+      "service": "s3",
+      "resource": "terraform-state",
+      "region": "global",
+      "description": "Bucket has no default server-side encryption configuration.",
+      "cis": "best practice",
+      "runbook": "runbooks/S3_004.md"
+    },
+    {
+      "check_id": "IAM_007",
+      "title": "Policy attached directly to user",
+      "severity": "LOW",
+      "service": "iam",
+      "resource": "deploy-bot",
+      "region": "global",
+      "description": "1 attached and 0 inline policies on the user; permissions should flow through groups or roles.",
+      "cis": "1.15",
+      "runbook": "runbooks/IAM_007.md"
+    },
+    {
+      "check_id": "S3_005",
+      "title": "S3 bucket versioning disabled",
+      "severity": "LOW",
+      "service": "s3",
+      "resource": "app-assets",
+      "region": "global",
+      "description": "Versioning is not enabled, so deleted or overwritten objects cannot be recovered.",
+      "cis": "best practice",
+      "runbook": "runbooks/S3_005.md"
+    },
+    {
+      "check_id": "S3_005",
+      "title": "S3 bucket versioning disabled",
+      "severity": "LOW",
+      "service": "s3",
+      "resource": "customer-exports",
+      "region": "global",
+      "description": "Versioning is not enabled, so deleted or overwritten objects cannot be recovered.",
+      "cis": "best practice",
+      "runbook": "runbooks/S3_005.md"
+    },
+    {
+      "check_id": "S3_005",
+      "title": "S3 bucket versioning disabled",
+      "severity": "LOW",
+      "service": "s3",
+      "resource": "terraform-state",
+      "region": "global",
+      "description": "Versioning is not enabled, so deleted or overwritten objects cannot be recovered.",
+      "cis": "best practice",
+      "runbook": "runbooks/S3_005.md"
+    },
+    {
+      "check_id": "S3_006",
+      "title": "S3 server access logging disabled",
+      "severity": "LOW",
+      "service": "s3",
+      "resource": "app-assets",
+      "region": "global",
+      "description": "Server access logging is off; bucket-level request history is not being recorded.",
+      "cis": "best practice",
+      "runbook": "runbooks/S3_006.md"
+    },
+    {
+      "check_id": "S3_006",
+      "title": "S3 server access logging disabled",
+      "severity": "LOW",
+      "service": "s3",
+      "resource": "customer-exports",
+      "region": "global",
+      "description": "Server access logging is off; bucket-level request history is not being recorded.",
+      "cis": "best practice",
+      "runbook": "runbooks/S3_006.md"
+    },
+    {
+      "check_id": "S3_006",
+      "title": "S3 server access logging disabled",
+      "severity": "LOW",
+      "service": "s3",
+      "resource": "terraform-state",
+      "region": "global",
+      "description": "Server access logging is off; bucket-level request history is not being recorded.",
+      "cis": "best practice",
+      "runbook": "runbooks/S3_006.md"
+    }
+  ],
+  "errors": []
+}

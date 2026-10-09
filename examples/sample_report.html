@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CloudAudit Report</title>
+<style>
+  :root { --ink:#1c1b1f; --paper:#ffffff; --line:#e3e1e7; --dim:#5f5d66; }
+  body { margin:0; padding:24px 16px; background:var(--paper); color:var(--ink);
+         font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:1180px; margin:0 auto; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .meta { color:var(--dim); margin-bottom:20px; }
+  table { border-collapse:collapse; width:100%; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);
+           vertical-align:top; }
+  th { font-size:12px; text-transform:uppercase; letter-spacing:.04em;
+       color:var(--dim); }
+  .badge { color:#fff; font-size:11px; font-weight:600; padding:2px 8px;
+           border-radius:10px; white-space:nowrap; }
+  .mono { font-family:ui-monospace, "SF Mono", Menlo, monospace; font-size:12.5px; }
+  a { color:#1a5fb4; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>CloudAudit report</h1>
+  <p class="meta">Account 123456789012 ·
+     regions us-east-1 ·
+     24 checks run · 27 findings
+     (1 critical · 10 high · 9 medium · 7 low) · generated 2026-10-09 23:30 UTC</p>
+  <table>
+    <thead><tr><th>Severity</th><th>Check</th><th>Title</th><th>Resource</th>
+    <th>Region</th><th>Detail</th><th>CIS v1.5</th><th>Runbook</th></tr></thead>
+    <tbody>
+<tr><td><span class='badge' style='background:#b3261e'>CRITICAL</span></td><td class='mono'>IAM_001</td><td>Root account MFA not enabled</td><td class='mono'>root</td><td>global</td><td>The root account does not have MFA enabled.</td><td class='mono'>1.5</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/IAM_001.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#c4451c'>HIGH</span></td><td class='mono'>CT_001</td><td>No multi-region CloudTrail</td><td class='mono'>account</td><td>global</td><td>No trail records management events across all regions, so API activity outside the home region is invisible.</td><td class='mono'>3.1</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/CT_001.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#c4451c'>HIGH</span></td><td class='mono'>EC2_001</td><td>Security group open to the world on SSH (22)</td><td class='mono'>sg-78cc6f96846330f0f (web-debug)</td><td>us-east-1</td><td>Ingress from 0.0.0.0/0 reaches port 22.</td><td class='mono'>5.2</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/EC2_001.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#c4451c'>HIGH</span></td><td class='mono'>EC2_002</td><td>Security group open to the world on RDP (3389)</td><td class='mono'>sg-78cc6f96846330f0f (web-debug)</td><td>us-east-1</td><td>Ingress from 0.0.0.0/0 reaches port 3389.</td><td class='mono'>5.2</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/EC2_002.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#c4451c'>HIGH</span></td><td class='mono'>IAM_003</td><td>Console user without MFA</td><td class='mono'>akarshika.admin</td><td>global</td><td>User has a console password but no MFA device.</td><td class='mono'>1.10</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/IAM_003.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#c4451c'>HIGH</span></td><td class='mono'>IAM_006</td><td>Customer-managed policy allows full admin</td><td class='mono'>quick-fix-admin</td><td>global</td><td>Policy allows Action &quot;*&quot; on Resource &quot;*&quot;, violating least privilege.</td><td class='mono'>1.16</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/IAM_006.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#c4451c'>HIGH</span></td><td class='mono'>S3_001</td><td>S3 bucket ACL grants public access</td><td class='mono'>customer-exports</td><td>global</td><td>Bucket ACL grants access to 1 public group(s) (AllUsers/AuthenticatedUsers).</td><td class='mono'>2.1.5</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_001.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#c4451c'>HIGH</span></td><td class='mono'>S3_002</td><td>S3 bucket policy allows public access</td><td class='mono'>app-assets</td><td>global</td><td>Bucket policy contains an unconditional Allow statement with Principal &quot;*&quot;.</td><td class='mono'>2.1.5</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_002.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#c4451c'>HIGH</span></td><td class='mono'>S3_003</td><td>S3 Block Public Access not fully enabled</td><td class='mono'>app-assets</td><td>global</td><td>Block Public Access settings disabled: BlockPublicAcls, IgnorePublicAcls, BlockPublicPolicy, RestrictPublicBuckets.</td><td class='mono'>2.1.5</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_003.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#c4451c'>HIGH</span></td><td class='mono'>S3_003</td><td>S3 Block Public Access not fully enabled</td><td class='mono'>customer-exports</td><td>global</td><td>Block Public Access settings disabled: BlockPublicAcls, IgnorePublicAcls, BlockPublicPolicy, RestrictPublicBuckets.</td><td class='mono'>2.1.5</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_003.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#c4451c'>HIGH</span></td><td class='mono'>S3_003</td><td>S3 Block Public Access not fully enabled</td><td class='mono'>terraform-state</td><td>global</td><td>Block Public Access settings disabled: BlockPublicAcls, IgnorePublicAcls, BlockPublicPolicy, RestrictPublicBuckets.</td><td class='mono'>2.1.5</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_003.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#b07d10'>MEDIUM</span></td><td class='mono'>EC2_004</td><td>Default security group allows traffic</td><td class='mono'>sg-d826c35b19453fbcf</td><td>us-east-1</td><td>The default security group should have no inbound or outbound rules so accidental use grants nothing.</td><td class='mono'>5.3</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/EC2_004.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#b07d10'>MEDIUM</span></td><td class='mono'>EC2_005</td><td>EBS volume not encrypted</td><td class='mono'>vol-bafec3662b67f2d88</td><td>us-east-1</td><td>Volume is not encrypted at rest.</td><td class='mono'>2.2.1</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/EC2_005.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#b07d10'>MEDIUM</span></td><td class='mono'>EC2_005</td><td>EBS volume not encrypted</td><td class='mono'>vol-d0f6cd65c340476ac</td><td>us-east-1</td><td>Volume is not encrypted at rest.</td><td class='mono'>2.2.1</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/EC2_005.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#b07d10'>MEDIUM</span></td><td class='mono'>EC2_006</td><td>EBS encryption by default disabled</td><td class='mono'>account-setting/us-east-1</td><td>us-east-1</td><td>New EBS volumes in this region are not encrypted automatically.</td><td class='mono'>2.2.1</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/EC2_006.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#b07d10'>MEDIUM</span></td><td class='mono'>EC2_007</td><td>Instance does not enforce IMDSv2</td><td class='mono'>i-559b7dc437e7763e4</td><td>us-east-1</td><td>Instance metadata service accepts IMDSv1 requests (HttpTokens is not &#x27;required&#x27;), enabling SSRF credential theft.</td><td class='mono'>5.6</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/EC2_007.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#b07d10'>MEDIUM</span></td><td class='mono'>IAM_008</td><td>Weak or missing account password policy</td><td class='mono'>account-password-policy</td><td>global</td><td>No account password policy is set.</td><td class='mono'>1.8</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/IAM_008.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#b07d10'>MEDIUM</span></td><td class='mono'>S3_004</td><td>S3 bucket default encryption disabled</td><td class='mono'>app-assets</td><td>global</td><td>Bucket has no default server-side encryption configuration.</td><td class='mono'>best practice</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_004.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#b07d10'>MEDIUM</span></td><td class='mono'>S3_004</td><td>S3 bucket default encryption disabled</td><td class='mono'>customer-exports</td><td>global</td><td>Bucket has no default server-side encryption configuration.</td><td class='mono'>best practice</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_004.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#b07d10'>MEDIUM</span></td><td class='mono'>S3_004</td><td>S3 bucket default encryption disabled</td><td class='mono'>terraform-state</td><td>global</td><td>Bucket has no default server-side encryption configuration.</td><td class='mono'>best practice</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_004.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#4f6f52'>LOW</span></td><td class='mono'>IAM_007</td><td>Policy attached directly to user</td><td class='mono'>deploy-bot</td><td>global</td><td>1 attached and 0 inline policies on the user; permissions should flow through groups or roles.</td><td class='mono'>1.15</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/IAM_007.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#4f6f52'>LOW</span></td><td class='mono'>S3_005</td><td>S3 bucket versioning disabled</td><td class='mono'>app-assets</td><td>global</td><td>Versioning is not enabled, so deleted or overwritten objects cannot be recovered.</td><td class='mono'>best practice</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_005.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#4f6f52'>LOW</span></td><td class='mono'>S3_005</td><td>S3 bucket versioning disabled</td><td class='mono'>customer-exports</td><td>global</td><td>Versioning is not enabled, so deleted or overwritten objects cannot be recovered.</td><td class='mono'>best practice</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_005.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#4f6f52'>LOW</span></td><td class='mono'>S3_005</td><td>S3 bucket versioning disabled</td><td class='mono'>terraform-state</td><td>global</td><td>Versioning is not enabled, so deleted or overwritten objects cannot be recovered.</td><td class='mono'>best practice</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_005.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#4f6f52'>LOW</span></td><td class='mono'>S3_006</td><td>S3 server access logging disabled</td><td class='mono'>app-assets</td><td>global</td><td>Server access logging is off; bucket-level request history is not being recorded.</td><td class='mono'>best practice</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_006.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#4f6f52'>LOW</span></td><td class='mono'>S3_006</td><td>S3 server access logging disabled</td><td class='mono'>customer-exports</td><td>global</td><td>Server access logging is off; bucket-level request history is not being recorded.</td><td class='mono'>best practice</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_006.md'>fix</a></td></tr>
+<tr><td><span class='badge' style='background:#4f6f52'>LOW</span></td><td class='mono'>S3_006</td><td>S3 server access logging disabled</td><td class='mono'>terraform-state</td><td>global</td><td>Server access logging is off; bucket-level request history is not being recorded.</td><td class='mono'>best practice</td><td><a href='https://github.com/TripathiAkarshika/cloudaudit/blob/main/runbooks/S3_006.md'>fix</a></td></tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
